@@ -34,12 +34,12 @@ output = "/tank/HOME/acrawford/6006/ProcessedBeaconData" # Where output files (c
 
 #Read in raw data
 setwd(input)
-fname1 = "47551.csv" #fname1 is the file name of the raw data that you will process
+fname1 = "463170_2012.csv" #fname1 is the file name of the raw data that you will process
 drift = read.table(fname1, header=T, sep=",", dec=".", na.strings="NULL", strip.white=FALSE)
 
 ###Source functions
 #Set program directory 
-prgdir = "/tank/HOME/acrawford/6006/Scipts" #Where scripts are kept
+prgdir = "/tank/HOME/acrawford/6006/Scripts" #Where scripts are kept
 setwd(prgdir)
 
 #Functions to convert raw data to standardized csv
@@ -54,6 +54,16 @@ source("polarplot.r")
 source("csv2shp.R")
 source("csv2kml.R")
 source("csv2gpx.R")
+
+#Functions to convert standardized csv to R plots
+source("prePlots.R") #This does the initial work and called in plot function
+source("prepolarplot.R")
+source("speedPlot.R")
+source("cummSpeed.R")
+
+#Function to output a summary stats file
+source("iceIslandStats.R")
+
 #Functions to # overwrite all files - backup first if you want to save the files!
 source("deleteFile.R")
 
@@ -76,13 +86,24 @@ csv2shp(beacon, substring(fname1,1,5)) # Beacon is the new name after raw data h
 # That will tell ArcInfo that it is not projected - WGS84 coords.
 # copy the file:  WGS1984.prj, which contains the following:
 # GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]
-file.copy("WGS1984.prj", paste(buoy, ".prj", sep=""), overwrite = TRUE)
+# file.copy("WGS1984.prj", paste(buoy, ".prj", sep=""), overwrite = TRUE)
 
 #Converting from standardized csv to kml. Output will be in output directory 
-csv2kml(beacon, substring(fname1,1,5))
+#Note: kml files cannot be overwritten. Move to a different directory if same file name exists in 
+#output directory already
+csv2kml(beacon, substring(fname1,1,5)) 
 
 #Converting from standardized csv to gpx. Output will be in output directory 
 csv2gpx(beacon, substring(fname1,1,5))
 
-#Converting csv to polar plot
+#Converting csv to polarPlot
 prepolarplot(beacon) #polarplot called within prepolarplot function
+
+#Converting csv to speedPlot
+speedPlot(beacon)
+
+#Converting csv to cummSpeed plot
+cummSpeed(beacon)
+
+#Text file of summary stats
+iceIslandStats(beacon)
