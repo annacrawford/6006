@@ -1,0 +1,37 @@
+This program is designed to digest raw tracking beacon data in csv format to output a standardized csv file and other quality added
+file types, detailed below. 
+
+Compiled by Anna Crawford, PhD Student, DGES, Carleton Univeristy
+Previously written scripts provided by Derek Mueller, Assistant Professor, DGES, Carleton University
+
+Compiled in February 2014
+Last modified: 6 March 2014
+
+3 Directories are recommended within your main beacon directory: "RawBeaconData", "ProcessedBeaconData" and "Scripts"
+
+In the command line, navigate to your main directory. 
+Keep the driver script in this main directory
+
+Command line: input directory, output directory, program directory, filename, beacon type
+
+input = where raw data is kept (i.e., RawBeaconData)
+output = where processed data will be written to (i.e., ProcessedBeaconData)
+program directory (prgdir) = where scripts are kept
+filename = name of raw beacon data csv file, without extension ('47551', NOT '47551.csv')
+beacon type = one of: Sailwx, Joubeh, Iridium, Oceanetics, Canatec
+
+Expected output: a standardized csv file, shp/shx/prj/dbf files (line and point), gpx files (line and point), kml files (line and point), 
+PolarPlot (png), SpeedPlot (png), Cummulative speed probability plot (png), and a text ice island statistics file
+
+Troubleshooting: 
+1) If Sailwx beacons do not run correctly during the standardization phase, check that there is not a left-over comma at the end of the header line. 
+
+2) If this statement returned: "Error in writeOGR(Dataset, paste(getwd(), paste(filename, "_pt", ".kml",  : 
+  layer exists, use a new layer name
+Calls: csv2kml -> writeOGR
+Execution halted"
+
+Go into your ProcessedBeaconData directory and remove kml files already written for that beacon. kml files cannot be overwritten. 
+
+3) Possible errors: Assertion statement on line X. If comes back false in command line window it means that there is an error
+with the standardized csv column data types

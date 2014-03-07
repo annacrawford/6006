@@ -5,7 +5,7 @@
 # Last Modified: 5 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert beacon data collected by sailwx.ino to a standardied csv 
-# before further processing to 'quality added' files. Called on by beacon_processing.R  
+# before further processing to 'quality added' files. Called on by BeaconProcessing.R  
 #
 # Necessary file: sailwx raw beacon data in csv format This should be kept in an 
 # 'input' directory with other raw data. 

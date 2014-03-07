@@ -5,7 +5,7 @@
 # Last Modified: 6 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert standardized beacon csv to speedplot  
-# Called on by beacon_processing.R  
+# Called on by BeaconProcessing.R  
 #
 # Necessary file: Processed/standardized beacon csv file 
 # Realize that there is an added line to remove rows with NAs when calculating azimuth. 
@@ -59,7 +59,7 @@ SpeedPlot<-
      main = "Ice island daily speed", sub = fname1)
     
     #Delete existing files
-    deleteFile(paste("speedPlot_", fname1, sep = ""), c("png"))    
+    DeleteFile(paste("speedPlot_", fname1, sep = ""), c("png"))    
     
     #Save plot to output directory
     dev.copy(png, paste("speedplot_", fname1, ".png", sep = ""))

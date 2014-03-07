@@ -6,7 +6,7 @@
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert beacon data downloaded from Joubeh's asset mananagement
 # system (asset.joubeh.com) to a standardied csv before further processing to 'quality added' 
-# files. Called on by beacon_processing.R  
+# files. Called on by BeaconProcessing.R  
 #
 # Necessary file: Joubeh beacon data in csv format. This should be kept in an 'input' 
 # directory with other raw data. 

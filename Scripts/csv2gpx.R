@@ -7,7 +7,7 @@
 # Descrition: function to write dataset to a point and line gpx file 
 # given a dataframe and output filename.  The dataframe must have columns lat + lon in wgs84
 # also only one beacon (line) per dataframe.   
-# Called on by beacon_processing.R  
+# Called on by BeaconProcessing.R  
 #
 # Necessary file: Processed/standardized beacon csv file 
 ##########################################################################################
@@ -41,7 +41,7 @@ csv2gpx <-
       proj4string(Dataset) <- CRS(c("+proj=longlat +ellps=WGS84"))
       
       # Overwrite all files - backup first if you want to save the files!
-      deleteFile(filename, c("gpx"))
+      DeleteFile(filename, c("gpx"))
     
       #GPX  Doesn't work properly for tracks...!!!
       

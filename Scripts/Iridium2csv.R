@@ -5,7 +5,7 @@
 # Last Modified: 5 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert raw Iridum beacon data to a standardied csv before
-# further processing to 'quality added' files. Called on by beacon_processing.R  
+# further processing to 'quality added' files. Called on by BeaconProcessing.R  
 #
 # Necessary file: Iridium raw beacon data This should be kept in an 
 # 'input' directory with other raw data. This is downloaded from a gmail account
@@ -130,5 +130,5 @@ Iridium2csv <-
     # Choose output directory
     setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
     #write csv file
-    write.table(Beacon, paste(fout, '.csv', sep= " "), sep = ",", col.names = TRUE, row.names = FALSE)
+    write.table(Beacon, paste(fout, '.csv', sep= ""), sep = ",", col.names = TRUE, row.names = FALSE)
   }    # End function

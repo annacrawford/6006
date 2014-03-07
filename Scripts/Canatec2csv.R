@@ -5,7 +5,7 @@
 # Last Modified: 5 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert raw Canatec beacon data to a standardied csv before
-# further processing to 'quality added' files. Called on by beacon_processing.R  
+# further processing to 'quality added' files. Called on by BeaconProcessing.R  
 #
 # Necessary file: Canatec raw beacon data This should be kept in an 
 # 'input' directory with other raw data. 

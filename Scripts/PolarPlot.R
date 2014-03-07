@@ -5,7 +5,7 @@
 # Last Modified: 6 March 2014 (by Anna Crawford)
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert standardized beacon csv to polarplot  
-# Called on by beacon_processing.R through running the PrePolarPlot function
+# Called on by BeaconProcessing.R through running the PrePolarPlot function
 #
 # Necessary file: Processed/standardized beacon csv file 
 #############################################################################################

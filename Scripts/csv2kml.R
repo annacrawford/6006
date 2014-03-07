@@ -7,7 +7,7 @@
 # Descrition: function to write dataset to a point and line kml file, given a dataframe
 # and output filename. The dataframe must have columns lat + lon in wgs84
 # also only one beacon (line) per dataframe.  
-# Called on by beacon_processing.R  
+# Called on by BeaconProcessing.R  
 #
 # Necessary file: Processed/standardized beacon csv file 
 ##########################################################################################

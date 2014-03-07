@@ -4,7 +4,7 @@
 # Created: 2011
 # Last Modified: 6 March 2014
 # Project: Ice island drift, deterioration and detection 
-# Descrition: Function to calculate distace and azimuth. Called on by beacon_processing.R 
+# Descrition: Function to calculate distace and azimuth. Called on by BeaconProcessing.R  
 # *   This subroutine will compute the distance, azimuth, and back
 # *   azimuth (in degrees), given the latitude and longitude (in degrees)
 # *   of an origin point and a target point.  (E+,W-; N+,S-)#

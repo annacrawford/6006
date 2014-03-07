@@ -5,7 +5,7 @@
 # Last Modified: 6 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert standardized beacon csv to polarplot. 
-# Called on by beacon_processing.R  
+# Called on by BeaconProcessing.R  
 #
 # Necessary file: Processed/standardized beaconcsv file. 
 
@@ -68,7 +68,7 @@ PrePolarPlot <-
               tlabel.col = "black", main = "Ice island daily velocity (km/d)", sub = fname1)
 
     # Delete existing files
-    deleteFile(paste("polarplot_", fname1, sep = ""), c("png"))
+    DeleteFile(paste("polarplot_", fname1, sep = ""), c("png"))
     
     # Save polarplot to output file  
     dev.copy(png, paste("polarplot_", fname1, ".png", sep = ""))

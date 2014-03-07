@@ -5,7 +5,7 @@
 # Last Modified: 5 March 2014
 # Project: Ice island Drift, deterioration and detection 
 # Descrition: Function to convert raw Oceanetics beacon data to a standardied csv before
-# further processing to 'quality added' files. Called on by beacon_processing.R  
+# further processing to 'quality added' files. Called on by BeaconProcessing.R  
 #
 # Necessary file: Oceanetic raw beacon data. This should be kept in an 
 # 'input' directory with other raw data. 

@@ -5,7 +5,7 @@
 # Last Modified: 6 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert processed/standardized csv beacon data to a summarized
-# text file. Called on by beacon_processing.R  
+# text file. Called on by BeaconProcessing.R  
 #
 # Necessary file: Standardized beacon csv. This should be kept in an 
 # 'output' directory with other processed data files. Writte there with beacon_processing.R 
@@ -63,7 +63,7 @@ IceIslandStats <-
     direction <- 0 #####FINISH
       
     # Overwrite past summary files - backup first if you want to save the files!
-    deleteFile(paste("summary_", fname1, sep = ""), c("txt"))
+    DeleteFile(paste("summary_", fname1, sep = ""), c("txt"))
     
     # Write text file to output directory with above summary information
     summary <- as.character(paste("summary_", fname1, ".txt", sep = ""))

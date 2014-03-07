@@ -5,7 +5,7 @@
 # Last Modified: 6 March 2014
 # Project: Ice island drift, deterioration and detection 
 # Descrition: Function to convert standardized beacon csv to cummulative speed plot  
-# Called on by beacon_processing.R  
+# Called on by BeaconProcessing.R  
 #
 # Necessary file: Processed/standardized beacon csv file 
 #############################################################################################
@@ -57,7 +57,7 @@ CummSpeed <-
      main = "Cummulative density function")
     
     # Delete existing files
-    deleteFile(paste("cummSpeed", substring(fname1,1,5), sep = ""), c("png"))
+    DeleteFile(paste("cummSpeed", substring(fname1,1,5), sep = ""), c("png"))
         
     # Save to output directory
     dev.copy(png, paste("cummSpeed_", substring(fname1,1,5), ".png", sep = ""))

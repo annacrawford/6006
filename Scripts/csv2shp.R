@@ -7,7 +7,7 @@
 # Descrition: # function to write dataset to a point and line shapefile, given a dataframe
 # and output filename. The dataframe must have columns lat + lon in wgs84
 # also only one beacon (line) per dataframe.   
-# Called on by beacon_processing.R  
+# Called on by BeaconProcessing.R  
 #
 # Necessary file: Processed/standardized beacon csv file 
 ##########################################################################################
@@ -40,7 +40,7 @@ csv2shp <-
       proj4string(Dataset) <- CRS(c("+proj=longlat +ellps=WGS84"))
       
       # Overwrite all files - backup first if you want to save the files!
-      deleteFile(filename, c("shp","dbf","prj","shx"))
+      DeleteFile(filename, c("shp","dbf","prj","shx"))
       
       ### Write files:
       writeOGR(Dataset, getwd(), paste(filename, "_pt", sep = ""), driver = 'ESRI Shapefile')
