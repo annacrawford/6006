@@ -79,5 +79,8 @@ IceIslandStats <-
                     paste("Ending Latitude", endLat, "Ending Longitude", endLon, sep = " "), 
                     paste("Total Distance (km)", totalDist), 
                     paste("Direction", direction)), summary)
+    
+    #Unit Test 4: Check that text file was written
+    if (!file_test("-f", paste("summary_", fname1,".txt",sep=''))) {stop("txt file not written")}
     }    # End function     
    

@@ -50,4 +50,8 @@ csv2gpx <-
       names(df) <- c('name','time')
       writeOGR(df, paste(getwd(),paste(filename, "_pt", ".gpx", sep = ""), sep = "/"), 'waypoints', "GPX")
       writeOGR(df, paste(getwd(),paste(filename, "_ln", ".gpx", sep = ""), sep = "/"), 'routes', "GPX")
+      
+      #Unit Test 4: Check that shape files were written
+      if (!file_test("-f", paste(fname1,"_pt",".gpx", sep=''))) {stop("gpx pt file not written")}
+      if (!file_test("-f", paste(fname1,"_ln",".gpx", sep=''))) {stop("gpx ln file not written")}
     }    # End function

@@ -11,6 +11,7 @@
 # beacon_processing.R
 #########################################################################################
 
+#Note - can this be fixed so that you can tell which line was wrong? 
 Validation <-
   function(Beacon)
   {

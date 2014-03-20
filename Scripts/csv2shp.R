@@ -45,4 +45,8 @@ csv2shp <-
       ### Write files:
       writeOGR(Dataset, getwd(), paste(filename, "_pt", sep = ""), driver = 'ESRI Shapefile')
       writeOGR(lnsspdf, getwd(), paste(filename, "_ln", sep = ""), driver = 'ESRI Shapefile')
+      
+      #Unit Test 4: Check that shape files were written
+      if (!file_test("-f", paste(fname1,"_pt",".shp", sep=''))) {stop("shp pt file not written")}
+      if (!file_test("-f", paste(fname1,"_ln",".shp", sep=''))) {stop("shp ln file not written")}
   }    # End formula

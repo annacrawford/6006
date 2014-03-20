@@ -64,4 +64,5 @@ SpeedPlot<-
     #Save plot to output directory
     dev.copy(png, paste("speedplot_", fname1, ".png", sep = ""))
     dev.off()
+
   }    # End fuction

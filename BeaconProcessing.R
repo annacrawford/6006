@@ -13,6 +13,7 @@
 # 'input' directory with other raw data
 #
 # Command line directions: input directory, output directory, program directory, filename, beacon type
+# Write in command line without commas
 
 # Distaz, polarplot functions written by Derek Mueller,  DGES - Carleton University 
 ##########################################################################################
@@ -28,6 +29,13 @@ prgdir <- args[3]
 fname1 <- args[4]
 beaconType <- args[5]
 
+### Unit test # 1, Checking correct number of arguments 
+# stated at command line 
+if(length(args) != 5) 
+  {
+  stop("check number of input arguments")
+  }
+
 ### Load Necessary librariers
 library(sp)
 library(rgdal)
@@ -42,20 +50,33 @@ library(assertthat)
 
 ### Read in raw data
 # fname1 is the file name of the raw data that you will process
+#input = "/tank/HOME/acrawford/6006/RawBeaconData"
+#fname1= "463170_2012"
+
 setwd(input)
 Drift <- read.csv(paste(fname1, '.csv', sep=""), header = T, sep = ",", dec = ".", 
                  na.strings = "NULL", strip.white = FALSE)
 
+### Unit test 2
+# checking that beacon data is read in 
+if (class(Drift) != "data.frame")
+{
+  stop("error reading in beacon data") 
+}
+
 ###Source functions
+prgdir = "/tank/HOME/acrawford/6006/Scripts"
 setwd(prgdir)
 
 # Functions to convert raw data to standardized csv
+source("raw2csv.R")
 source("Distaz.R")
 source("Sailwx2csv.R")
 source("Joubeh2csv.R")
 source("Iridium2csv.R")
 source("Oceanetics2csv.R")
 source("Canatec2csv.R")
+
 source("Validation.R")    # Assertion function to check standardization procedure
 
 # Functions to convert standardized csv to quality added file types
@@ -73,24 +94,12 @@ source("CummSpeed.R")
 source("IceIslandStats.R")
 
 # Function to overwrite all files - backup first if you want to save the files!
-source("deleteFile.R")
+source("DeleteFile.r")
 
 ### Processing raw data
 # Run function relevant to the beacon's source/type
 # Converts raw data to standardized csv format 
-
-if (beaconType == "Sailwx") {
-  Sailwx2csv(Drift)
-} else if (beaconType == "Iridium") {
-  Iridium2csv(Drift)
-} else if (beaconType == "Oceanetics") {
-  Oceanetics2csv(Drift)
-} else if (beaconType == "Joubeh") {
-  Joubeh2csv(Drift)
-} else {
-  Canatec2csv(Drift)
-}
-
+raw2csv(beaconType, Drift)
 
 #########################################################################################
 ### Convert standardized csv files to quality added files 
@@ -98,10 +107,12 @@ if (beaconType == "Sailwx") {
 # Need to read in new csv data located in output directory. All following files will be 
 # written to this output directory. 
 #setwd(output) # Maybe this isn't needed because x2csv scripts already are in this directory 
+setwd('/tank/HOME/acrawford/6006/ProcessedBeaconData')
 Beacon <- read.table(paste(fname1,'.csv', sep = ""), header = TRUE , sep = ",", dec = ".", 
                    na.strings = "NULL", strip.white = FALSE)
 
-### Assertion to check if standardized data is in correct standardized format
+### Unit test 3
+# Assertion to check if standardized data is in correct standardized format
 Validation(Beacon)
 
 #Converting from standardized csv to point shapefile. 
@@ -134,3 +145,7 @@ CummSpeed(Beacon)
 
 # Text file of summary stats
 IceIslandStats(Beacon)
+
+# Unit test 4
+# Check that Rplots.pdf (contains polarplot, speed plot and cummSpeed plot) were created and saved
+if (!file_test("-f", paste("Rplots", ".pdf",sep=''))) {stop("plot pdf not written")}

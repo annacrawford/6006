@@ -20,6 +20,8 @@ program directory (prgdir) = where scripts are kept
 filename = name of raw beacon data csv file, without extension ('47551', NOT '47551.csv')
 beacon type = one of: Sailwx, Joubeh, Iridium, Oceanetics, Canatec
 
+** output and prgdir must be described in full (i.e., /tank/HOME/acrawford/6006/Scripts) **
+
 Expected output: a standardized csv file, shp/shx/prj/dbf files (line and point), gpx files (line and point), kml files (line and point), 
 PolarPlot (png), SpeedPlot (png), Cummulative speed probability plot (png), and a text ice island statistics file
 

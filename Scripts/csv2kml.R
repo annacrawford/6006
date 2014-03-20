@@ -45,4 +45,8 @@ csv2kml <-
       # KML
       writeOGR(Dataset, paste(getwd(),paste(filename, "_pt", ".kml", sep = ""), sep = "/"), filename, "KML")
       writeOGR(lnsspdf, paste(getwd(),paste(filename, "_ln", ".kml", sep = ""), sep = "/"), filename, "KML")
+      
+      # Unit Test 4: Check that kml files were written
+      if (!file_test("-f", paste(fname1,"_pt",".kml", sep=''))) {stop("kml pt file not written")}
+      if (!file_test("-f", paste(fname1,"_ln",".kml", sep=''))) {stop("kml ln file not written")}
     }    # End function

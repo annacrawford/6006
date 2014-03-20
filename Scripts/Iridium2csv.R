@@ -128,7 +128,7 @@ Iridium2csv <-
     fout = fname1 
 
     # Choose output directory
-    setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
+    setwd(output)
     #write csv file
     write.table(Beacon, paste(fout, '.csv', sep= ""), sep = ",", col.names = TRUE, row.names = FALSE)
   }    # End function

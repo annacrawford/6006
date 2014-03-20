@@ -73,4 +73,5 @@ PrePolarPlot <-
     # Save polarplot to output file  
     dev.copy(png, paste("polarplot_", fname1, ".png", sep = ""))
     dev.off()
-   }    # End function
+    
+     }    # End function

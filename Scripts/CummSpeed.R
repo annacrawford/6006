@@ -60,6 +60,8 @@ CummSpeed <-
     DeleteFile(paste("cummSpeed", substring(fname1,1,5), sep = ""), c("png"))
         
     # Save to output directory
+    setwd(output)
     dev.copy(png, paste("cummSpeed_", substring(fname1,1,5), ".png", sep = ""))
     dev.off()
+    
   }    # End function
