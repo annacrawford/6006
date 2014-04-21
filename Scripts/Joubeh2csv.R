@@ -20,13 +20,13 @@ Joubeh2csv <-
     ### The following information is kept in but noted out incase the script ever needs to 
     # be run in stand-alone format
     ### Set working directory (where raw beacon files are kept)
-    # setwd("/tank/HOME/acrawford/6006/RawBeaconData")
+    #setwd("/tank/HOME/acrawford/6006/RawBeaconData")
 
     # Change to specific Joubeh beacon file - without file extension
-    # fname1 = "BUOY1"   
+    #fname1 = "BUOY4.csv"   
 
     # Read in the data
-    # Drift = read.csv(fname1, header=TRUE)
+    #Drift = read.csv(fname1, header=TRUE)
 
     # Joubeh column headers are: Asset.Name, Modem.Id, Date.GMT, GPS.LATITUDE..DEGREES,                 
     # GPS.LONGITUDE..DEGREES, FORMAT.ID, YEAR, MONTH, DAY..day, MINUTE..min, 
@@ -77,7 +77,7 @@ Joubeh2csv <-
     Beacon <- Beacon[Beacon[,5] < z,]
 
     # Sort data (rows) based on year, month, day, hour, minute (ascending)
-    Beacon <- Beacon[order(Beacon$year, Beacon$month, Beacon$day, Beacon$hour, Beacon$minute), ]
+    Beacon <- Beacon[order(Beacon$year, Beacon$month, Beacon$day, Beacon$hour, Beacon$minute),]
 
     # Remove duplicate rows
     Beacon <- Beacon[!duplicated(Beacon[,2:6]), ]
@@ -97,7 +97,7 @@ Joubeh2csv <-
     # calculate distance traveled, calculate speed, determine a threshold speed, remove entries
     # with speeds above this. Loop format 
     
-    # Following is D.Mueller's work from the Iridium2Shp.r script                                                          
+    # Following is D. Mueller's work from the Iridium2Shp.r script                                                          
     # First, get the distance travelled between positions    
     # Translate between date time formats
     bdate = paste(Beacon$year, 
@@ -113,18 +113,18 @@ Joubeh2csv <-
     gps_time = datetime   # Name for dataframe
 
     obs = seq(1, length(Beacon$year))    # Makes a list of observation numbers 
-    Beacon$beacon = substring(fname1, 1, 6)    # Adds a beacon name column
+    Beacon$beacon = substring(fname1, 1, 5)    # Adds a beacon name column
 
     # Put the new vectors into the dataframe to keep together
     Beacon = data.frame(Beacon, obs, gps_time)
-
+     
     # Calculating distance
-    for (i in 1) { 
+    for (i in 1:2) { 
       dist = vector(mode = 'numeric', length = 0)
       az = vector(mode = 'numeric', length = 0)
       err = vector(mode = 'numeric', length = 0)
   
-    for (i in 1:2) {
+    for (i in 1:length(Beacon$lat)-1) {
        vect = Distaz(Beacon$lat[i], Beacon$lon[i],Beacon$lat[i + 1], Beacon$lon[i + 1])      
        dist = append(dist, vect$dist)
        az = append(az, vect$az)
@@ -155,10 +155,11 @@ Joubeh2csv <-
       ### Write csv
       # Choose file name
       fout = fname1 
-  
+    
       # Choose output directory 
       setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
-      write.csv(beacon, paste(fout, '.csv', sep=""), row.names=FALSE)
+      write.table(Beacon, paste(fout, '.csv', sep= ""), sep = ",", col.names = TRUE, row.names = FALSE)
+     
     } #  End fuction
 
         

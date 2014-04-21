@@ -1,0 +1,13 @@
+Summary information for beacon 47559
+ 
+Start Date 2011-10-22 12:28:00
+End Date 2013-02-21 00:51:00
+Total Days Tracked 1216
+ 
+Average Speed (kph) 3.30363253502501
+Average Temperature (C) NA
+Average Batter (V) 0
+Average Atmospheric Pressure (hPa) NA
+ 
+Starting Latitude 70.964 Starting Longitude -72.193
+Ending Latitude 68.463 Ending Longitude -65.24

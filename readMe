@@ -5,35 +5,75 @@ Compiled by Anna Crawford, PhD Student, DGES, Carleton Univeristy
 Previously written scripts provided by Derek Mueller, Assistant Professor, DGES, Carleton University
 
 Compiled in February 2014
-Last modified: 6 March 2014
+Last modified: 16 April 2014
 
 3 Directories are recommended within your main beacon directory: "RawBeaconData", "ProcessedBeaconData" and "Scripts"
 
-In the command line, navigate to your main directory. 
-Keep the driver script in this main directory
+At the command line, navigate to your main directory. 
+Keep the driver script (BeaconProcessing.R) in this main directory
 
 Command line: input directory, output directory, program directory, filename, beacon type
 
-input = where raw data is kept (i.e., RawBeaconData)
-output = where processed data will be written to (i.e., ProcessedBeaconData)
-program directory (prgdir) = where scripts are kept
+input = where raw data is kept (use full path, e.g. /tank/HOME/acrawford/6006/RawBeaconData)
+output = where processed data will be written to (e.g., /tank/HOME/acrawford/6006/ProcessedBeaconData)
+program directory (prgdir) = where scripts (except driver script) are kept (e.g., /tank/HOME/acrawford/6006/Scripts)
 filename = name of raw beacon data csv file, without extension ('47551', NOT '47551.csv')
 beacon type = one of: Sailwx, Joubeh, Iridium, Oceanetics, Canatec
 
-** output and prgdir must be described in full (i.e., /tank/HOME/acrawford/6006/Scripts) **
-
 Expected output: a standardized csv file, shp/shx/prj/dbf files (line and point), gpx files (line and point), kml files (line and point), 
-PolarPlot (png), SpeedPlot (png), Cummulative speed probability plot (png), and a text ice island statistics file
+A pdf with: PolarPlot (png), SpeedPlot (png) and cummulative speed probability plot (png), 
+A text ice island statistics file
 
 Troubleshooting: 
 1) If Sailwx beacons do not run correctly during the standardization phase, check that there is not a left-over comma at the end of the header line. 
 
-2) If this statement returned: "Error in writeOGR(Dataset, paste(getwd(), paste(filename, "_pt", ".kml",  : 
+2) If this statement is written to the log: "Error in writeOGR(Dataset, paste(getwd(), paste(filename, "_pt", ".kml",  : 
   layer exists, use a new layer name
 Calls: csv2kml -> writeOGR
 Execution halted"
 
 Go into your ProcessedBeaconData directory and remove kml files already written for that beacon. kml files cannot be overwritten. 
 
-3) Possible errors: Assertion statement on line X. If comes back false in command line window it means that there is an error
-with the standardized csv column data types
+3) Possible errors: Assertion statement on line 131 (Validation function). If comes back false in command line window it means that there is an error with the standardized csv column data types
+
+To add another beacon type, you must: 
+1) Create a new function script to standardize the raw csv data to the standardized format (see Sailwx2csv, Iridium2csv, etc. for 
+templates)
+
+2) Add this function to the sourced functions in BeaconProcessing.R (line 46)
+
+3) Add this function to raw2csv.R, along with the appropriate 'if' statement (e.g., if (beaconType == "Sailwx") {
+      Sailwx2csv(Drift))
+
+4) Add the beaconType to the list of valid command line options at line 96: valid = c("Joubeh", "Iridium", "Sailwx", "Oceanetics", "Canatec")
+
+5) Add the beaconType to the list of available options at the command line (beginning of this document). 
+
+Error handling and logging
+Errors are logged to the output directory in BeaconProcessingLog.txt. It is appendable and messages will be compiled with every run. A timestamp is logged with each run. 
+
+Errors that will halt to program include:
+1) An incorrect number of command line arguments
+
+2) beaconType argument is incorrect (not a possible option)
+
+3) If there is an error reading in the beacon data
+
+4) The standardized csv columns having incorrect data types
+
+5) Attempting to force the program to overwrite kml files in the output directry 
+
+6) Rplots.pdf not being written
+
+Errors that will log but allow the program to continue include:
+
+1) The gps_time column of the standardized csv being the incorrect format
+
+2) The gps_time column of the standardized csv not being in chronological order
+
+Version control: 
+A. Crawford has implemented Git and GitHub for version control. See associated document written for GEOG 6007 in April 2014. 
+Contact anna.crawford@carleton.ca for more info. 
+
+
+

@@ -15,11 +15,24 @@
 # Command line directions: input directory, output directory, program directory, filename, beacon type
 # Write in command line without commas
 
-# Distaz, polarplot functions written by Derek Mueller,  DGES - Carleton University 
+# Distaz function is available with the GEOmap library
+# PolarPlot functions found through  the heR.Misc library 
 ##########################################################################################
 
 ### Remove previous workspace
 rm(list=ls(all=TRUE))
+
+### Load Necessary librariers
+library(sp)
+library(rgdal)
+library(chron)
+library(RSEIS)
+library(RPMG)
+library(shapefiles)
+library(grDevices)
+library(assertthat)
+library(rPython)
+library(date)
 
 ### Define system arguments
 args <- commandArgs(TRUE)
@@ -29,43 +42,8 @@ prgdir <- args[3]
 fname1 <- args[4]
 beaconType <- args[5]
 
-### Unit test # 1, Checking correct number of arguments 
-# stated at command line 
-if(length(args) != 5) 
-  {
-  stop("check number of input arguments")
-  }
-
-### Load Necessary librariers
-library(sp)
-library(rgdal)
-library(chron)
-library(RSEIS)
-library(RPMG)
-library(sp)
-library(shapefiles)
-library(rgdal)
-library(grDevices)
-library(assertthat)
-
-### Read in raw data
-# fname1 is the file name of the raw data that you will process
-#input = "/tank/HOME/acrawford/6006/RawBeaconData"
-#fname1= "463170_2012"
-
-setwd(input)
-Drift <- read.csv(paste(fname1, '.csv', sep=""), header = T, sep = ",", dec = ".", 
-                 na.strings = "NULL", strip.white = FALSE)
-
-### Unit test 2
-# checking that beacon data is read in 
-if (class(Drift) != "data.frame")
-{
-  stop("error reading in beacon data") 
-}
-
 ###Source functions
-prgdir = "/tank/HOME/acrawford/6006/Scripts"
+prgdir ='/tank/HOME/acrawford/6006/Scripts'
 setwd(prgdir)
 
 # Functions to convert raw data to standardized csv
@@ -96,24 +74,77 @@ source("IceIslandStats.R")
 # Function to overwrite all files - backup first if you want to save the files!
 source("DeleteFile.r")
 
+# Capture messages and errors to a log file in output directory
+setwd(output)
+BLP <- file("BeaconProcessingLog.txt", open="at")
+
+# Output start time, beaconType and filename (fname1) to above log
+sink(BLP, type="output", append=TRUE, split = FALSE) 
+print(Sys.time())
+print(beaconType)
+print(fname1)
+sink(BLP, type="message", append=TRUE, split = FALSE) 
+
+### Unit test # 1
+# Checking correct number of arguments stated at command line 
+if(length(args) != 5) 
+{
+  stop("check number of input arguments  ")  
+}
+
+# Checking that beaconType argument is one of possible options
+valid = c("Joubeh", "Iridium", "Sailwx", "Oceanetics", "Canatec")
+if(!(beaconType %in% valid))
+{
+  stop("beaconType is not a possible option  ")
+}
+
+### Read in raw data
+setwd(input)
+Drift <- read.csv(paste(fname1, '.csv', sep=""), header = T, sep = ",", dec = ".", 
+       na.strings = "NULL", strip.white = FALSE)
+
+### Unit test 2
+# checking that beacon data is read in 
+if (class(Drift) != "data.frame")
+{
+  stop("error reading in beacon data  ") 
+}
+
 ### Processing raw data
 # Run function relevant to the beacon's source/type
 # Converts raw data to standardized csv format 
-raw2csv(beaconType, Drift)
+raw2csv(beaconType, Drift) 
 
 #########################################################################################
 ### Convert standardized csv files to quality added files 
 
 # Need to read in new csv data located in output directory. All following files will be 
 # written to this output directory. 
-#setwd(output) # Maybe this isn't needed because x2csv scripts already are in this directory 
-setwd('/tank/HOME/acrawford/6006/ProcessedBeaconData')
+setwd(output) # Maybe this isn't needed because x2csv scripts already are in this directory 
 Beacon <- read.table(paste(fname1,'.csv', sep = ""), header = TRUE , sep = ",", dec = ".", 
                    na.strings = "NULL", strip.white = FALSE)
 
 ### Unit test 3
 # Assertion to check if standardized data is in correct standardized format
+# Returns 'True' or 'False'
 Validation(Beacon)
+
+# Test to check if time is in correct format
+# Will output an error message to log, but will continue to run program
+date <- try(as.Date(Beacon[2:length(Beacon$gps_time),14], format = "%Y-%m-%d %H:%M:%S"))
+  if( class( date ) == "try-error" || is.na ( date ) ) print ( " gps_time is not in correct format")
+
+# Assertion to check that data is ordered chronologically
+# Outputs a warning to log file - program continues to run
+# Get the time difference between positions & make sure all are positive
+chronDate <- as.numeric(difftime(Beacon$gps_time[2:length(Beacon$gps_time)],
+  Beacon$gps_time[1:length(Beacon$gps_time)-1], units = "hours")) 
+
+if (any(chronDate<0)=='TRUE')
+{
+  print("standardized csv is not ordered chronologically by gps_time ") 
+}
 
 #Converting from standardized csv to point shapefile. 
 csv2shp(Beacon, fname1) 
@@ -128,7 +159,8 @@ csv2shp(Beacon, fname1)
 
 # Converting from standardized csv to kml
 # Note: kml files cannot be overwritten. Move these to a different directory if same file name 
-# exists in output directory already
+# exists in output directory already.
+# This error will cause the program to halt and an error will be reported in the file log
 csv2kml(Beacon, fname1) 
 
 # Converting from standardized csv to gpx 
@@ -148,4 +180,7 @@ IceIslandStats(Beacon)
 
 # Unit test 4
 # Check that Rplots.pdf (contains polarplot, speed plot and cummSpeed plot) were created and saved
-if (!file_test("-f", paste("Rplots", ".pdf",sep=''))) {stop("plot pdf not written")}
+if (!file_test("-f", paste("Rplots", ".pdf",sep=''))) {stop("plot pdf not written   ")}
+
+#Disconnect sink
+unlink("BeaconProcessingLog.txt")

@@ -59,9 +59,7 @@ IceIslandStats <-
     endLon <- tail(dayLon,n=1)
     startLat <- dayLat[1]
     startLon <- dayLon[1]
-    totalDist <- 1 #####FINISH
-    direction <- 0 #####FINISH
-      
+          
     # Overwrite past summary files - backup first if you want to save the files!
     DeleteFile(paste("summary_", fname1, sep = ""), c("txt"))
     
@@ -76,9 +74,7 @@ IceIslandStats <-
                     paste("Average Batter (V)", aveBatt, sep = " "), 
                     paste("Average Atmospheric Pressure (hPa)", aveAtmPress, sep = " "), " ",
                     paste("Starting Latitude", startLat, "Starting Longitude", startLon, sep = " "), 
-                    paste("Ending Latitude", endLat, "Ending Longitude", endLon, sep = " "), 
-                    paste("Total Distance (km)", totalDist), 
-                    paste("Direction", direction)), summary)
+                    paste("Ending Latitude", endLat, "Ending Longitude", endLon, sep = " ")), summary)
     
     #Unit Test 4: Check that text file was written
     if (!file_test("-f", paste("summary_", fname1,".txt",sep=''))) {stop("txt file not written")}

@@ -1,0 +1,15 @@
+Summary information for beacon 463170_2012
+ 
+Start Date 2012-01-02 00:00:00
+End Date 2012-10-23 00:00:00
+Total Days Tracked 296
+ 
+Average Speed (kph) 2.59513462121818
+Average Temperature (C) -99
+Average Batter (V) 7.99974884889075
+Average Atmospheric Pressure (hPa) -99
+ 
+Starting Latitude 74.51445 Starting Longitude -93.79586667
+Ending Latitude 72.18005 Ending Longitude -71.91515
+Total Distance (km) 1
+Direction 0

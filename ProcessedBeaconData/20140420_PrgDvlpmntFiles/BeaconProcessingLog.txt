@@ -1,0 +1,14 @@
+[1] "2014-04-15 15:43:01 EDT"
+[1] "Iridium"
+[1] "463170_2012"
+Error: unexpected ',' in "                  na.strings = "NULL","
+Execution halted
+[1] "2014-04-15 15:47:44 EDT"
+[1] "Iridium"
+[1] "463170_2012"
+[1] TRUE
+[1] "standardized csv is not ordered chronologically by gps_time "
+Error in writeOGR(Dataset, paste(getwd(), paste(filename, "_pt", ".kml",  : 
+  layer exists, use a new layer name
+Calls: csv2kml -> writeOGR
+Execution halted

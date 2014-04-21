@@ -1,0 +1,22 @@
+[1] "2014-04-21 12:04:30 EDT"
+[1] "Joubeh"
+[1] "BUOY_4"
+Error in as.POSIXlt.character(x, tz = tz) : 
+  character string is not in a standard unambiguous format
+Calls: raw2csv ... strftime -> format -> as.POSIXlt -> as.POSIXlt.character
+In addition: Warning messages:
+1: In Ops.factor(Beacon[, 7], latMax) : < not meaningful for factors
+2: In Ops.factor(Beacon[, 7], latMin) : > not meaningful for factors
+Execution halted
+[1] "2014-04-21 12:06:48 EDT"
+[1] "Joubeh"
+[1] "BUOY4"
+Error in if (!res) { : argument is of length zero
+Calls: Validation -> validate_that -> see_if
+Execution halted
+[1] "2014-04-21 12:14:29 EDT"
+[1] "Joubeh"
+[1] "BUOY4"
+Error in if (!res) { : argument is of length zero
+Calls: Validation -> validate_that -> see_if
+Execution halted
