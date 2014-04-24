@@ -25,7 +25,7 @@ raw2csv <-
       Canatec2csv(Drift)
     }    # End statement 
   
-    #Unit Test 4: Check that csv was written
+    #Test: Check that csv was written
    if (!file_test("-f", paste(fname1,".csv",sep=''))) {stop("csv file not written")}
     # End function
   }

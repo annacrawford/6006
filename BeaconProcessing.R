@@ -43,7 +43,7 @@ fname1 <- args[4]
 beaconType <- args[5]
 
 ###Source functions
-prgdir ='/tank/HOME/acrawford/6006/Scripts'
+#prgdir ='/tank/HOME/acrawford/6007/Scripts'
 setwd(prgdir)
 
 # Functions to convert raw data to standardized csv
@@ -90,14 +90,14 @@ sink(BLP, type="message", append=TRUE, split = FALSE)
 if(length(args) != 5) 
 {
   stop("check number of input arguments  ")  
-}
+}    # end check
 
 # Checking that beaconType argument is one of possible options
 valid = c("Joubeh", "Iridium", "Sailwx", "Oceanetics", "Canatec")
 if(!(beaconType %in% valid))
 {
   stop("beaconType is not a possible option  ")
-}
+}    # end check
 
 ### Read in raw data
 setwd(input)
@@ -109,7 +109,7 @@ Drift <- read.csv(paste(fname1, '.csv', sep=""), header = T, sep = ",", dec = ".
 if (class(Drift) != "data.frame")
 {
   stop("error reading in beacon data  ") 
-}
+}    # end check
 
 ### Processing raw data
 # Run function relevant to the beacon's source/type
@@ -144,7 +144,7 @@ chronDate <- as.numeric(difftime(Beacon$gps_time[2:length(Beacon$gps_time)],
 if (any(chronDate<0)=='TRUE')
 {
   print("standardized csv is not ordered chronologically by gps_time ") 
-}
+}    # end check
 
 #Converting from standardized csv to point shapefile. 
 csv2shp(Beacon, fname1) 
@@ -180,7 +180,10 @@ IceIslandStats(Beacon)
 
 # Unit test 4
 # Check that Rplots.pdf (contains polarplot, speed plot and cummSpeed plot) were created and saved
-if (!file_test("-f", paste("Rplots", ".pdf",sep=''))) {stop("plot pdf not written   ")}
+if (!file_test("-f", paste("Rplots", ".pdf",sep=''))) 
+{
+  stop("plot pdf not written   ")
+}    # end check
 
 #Disconnect sink
 unlink("BeaconProcessingLog.txt")

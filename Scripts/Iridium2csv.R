@@ -20,7 +20,7 @@ Iridium2csv <-
       ### The following information is kept in but noted out incase the script ever needs to 
       # be run in stand-alone format
       # Set working directory (where raw beacon files are kept)
-      # setwd("/tank/HOME/acrawford/6006/RawBeaconData")
+      # setwd("/tank/HOME/acrawford/6007/RawBeaconData")
       
       # Change to specific Iridum beacon file - without file extension and read in data
       # fname1 = "463170_2012.csv"

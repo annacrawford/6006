@@ -25,7 +25,7 @@ Sailwx2csv <-
     ### The following information is kept in but noted out incase the script ever needs to 
     # be run in stand-alone format
     ### Set working directory (where raw beacon files are kept)
-    # setwd("/tank/HOME/acrawford/6006/RawBeaconData")
+    # setwd("/tank/HOME/acrawford/6007/RawBeaconData")
 
     # Change to specific Sailwx beacon file - without file extension
     # fname1 = "47551"
@@ -152,7 +152,7 @@ Sailwx2csv <-
     fout = as.character(Beacon$beacon[1])
 
     # Set directory for output csv file
-    setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
+    setwd("/tank/HOME/acrawford/6007/ProcessedBeaconData")
     write.table(Beacon, paste(fout, ".csv", sep=""), sep = ",", col.names=TRUE, row.names=FALSE)
   }  # End function
 

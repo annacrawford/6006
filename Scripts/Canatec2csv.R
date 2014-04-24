@@ -19,7 +19,7 @@ Canatec2csv <-
     ### The following information is kept in but noted out incase the script ever needs to 
     # be run in stand-alone format
     ### Set working directory (where raw beacon files are kept)
-    # setwd("/tank/HOME/acrawford/6006/RawBeaconData")
+    # setwd("/tank/HOME/acrawford/6007/RawBeaconData")
     
     # Change to specific Canatec beacon file - without file extension
     # fname1 = "300234011240410"      
@@ -154,7 +154,7 @@ Canatec2csv <-
     fout = fname1 
     
     # Choose output directory 
-    setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
+    setwd("/tank/HOME/acrawford/6007/ProcessedBeaconData")
     write.csv(Beacon, paste(fout, '.csv', sep=""), row.names=FALSE)
   }    # End function
 

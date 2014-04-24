@@ -12,7 +12,8 @@ Last modified: 16 April 2014
 At the command line, navigate to your main directory. 
 Keep the driver script (BeaconProcessing.R) in this main directory
 
-Command line: input directory, output directory, program directory, filename, beacon type
+Command line: 'input directory' 'output directory' 'program directory' 'filename' 'beacon type'
+**Note: apostophes not needed at the command line**
 
 input = where raw data is kept (use full path, e.g. /tank/HOME/acrawford/6006/RawBeaconData)
 output = where processed data will be written to (e.g., /tank/HOME/acrawford/6006/ProcessedBeaconData)
@@ -34,7 +35,9 @@ Execution halted"
 
 Go into your ProcessedBeaconData directory and remove kml files already written for that beacon. kml files cannot be overwritten. 
 
-3) Possible errors: Assertion statement on line 131 (Validation function). If comes back false in command line window it means that there is an error with the standardized csv column data types
+3) Possible errors: Assertion statement on line 131 (Validation function). If comes back false in command line window it means that there is an error with the standardized csv column data types.
+
+4) Necessary packages are listed between Lines 25-35 of BeaconProcessing.R. Please load these if they are not already on your system. 
 
 To add another beacon type, you must: 
 1) Create a new function script to standardize the raw csv data to the standardized format (see Sailwx2csv, Iridium2csv, etc. for 
@@ -50,7 +53,7 @@ templates)
 5) Add the beaconType to the list of available options at the command line (beginning of this document). 
 
 Error handling and logging
-Errors are logged to the output directory in BeaconProcessingLog.txt. It is appendable and messages will be compiled with every run. A timestamp is logged with each run. 
+Errors are logged to the output directory in BeaconProcessingLog.txt. It is appendable and messages will be compiled with every run. A timestamp is logged with each run WHERE AN ERROR OCCURS. No logging will occur if there is no errors or warnings are initiated.  
 
 Errors that will halt to program include:
 1) An incorrect number of command line arguments

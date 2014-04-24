@@ -20,7 +20,7 @@ Joubeh2csv <-
     ### The following information is kept in but noted out incase the script ever needs to 
     # be run in stand-alone format
     ### Set working directory (where raw beacon files are kept)
-    #setwd("/tank/HOME/acrawford/6006/RawBeaconData")
+    #setwd("/tank/HOME/acrawford/6007/RawBeaconData")
 
     # Change to specific Joubeh beacon file - without file extension
     #fname1 = "BUOY4.csv"   
@@ -54,7 +54,7 @@ Joubeh2csv <-
 
     # Declaring of extra information - may or may not be included in raw data. 
     # Here is the likely available data. 
-    airTemp <- Drift$Sea.Surface.Temperature..ﾰC.    # air temperature
+    airTemp <- Drift$Sea.Surface.Temperature..ﾰC.    # air temperature, degrees C
     batt <- Drift$Battery.Voltage..V.    #  battery voltage
     atmPres <- length(Drift$beacon)    # atmospheric pressure
     formatID <- Drift$FORMAT.ID    # Format ID
@@ -157,7 +157,7 @@ Joubeh2csv <-
       fout = fname1 
     
       # Choose output directory 
-      setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
+      setwd("/tank/HOME/acrawford/6007/ProcessedBeaconData")
       write.table(Beacon, paste(fout, '.csv', sep= ""), sep = ",", col.names = TRUE, row.names = FALSE)
      
     } #  End fuction

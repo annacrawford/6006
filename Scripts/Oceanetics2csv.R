@@ -20,7 +20,7 @@ Oceanetics2csv <-
     # be run in stand-alone format
     # Set working directory
     # Change to where raw Beacon files are kept
-    # setwd("/tank/HOME/acrawford/6006/RawBeaconData")
+    # setwd("/tank/HOME/acrawford/6007/RawBeaconData")
     
     # Change to specific Oceanetics beacon - without file extension and read in data
     # fname1  =  "300034013460170.csv"        
@@ -146,6 +146,6 @@ Oceanetics2csv <-
         
     ### Write csv
     # Choose output directory 
-    setwd("/tank/HOME/acrawford/6006/ProcessedBeaconData")
+    setwd("/tank/HOME/acrawford/6007/ProcessedBeaconData")
     write.csv(Beacon, paste(fname1,'.csv', sep=""),  row.names=FALSE)
     }    # End function
